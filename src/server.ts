@@ -1,9 +1,10 @@
 import fastify from "fastify";
 import veiculoRoutes from "./routes/veiculoRoutes";
-
+import vagaRoutes from "./routes/vagaRoutes";
 const app = fastify();
 
 app.register(veiculoRoutes);
+app.register(vagaRoutes);
 
 const PORT_DEV= Number(process.env.PORT_DEV);
 

@@ -1,13 +1,13 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import VeiculoService from '../services/VeiculoService';
 import { createVeiculoSchema, updateVeiculoSchema } from '../schemas/VeiculoSchema';
-import { Veiculo } from '../models/veiculo';
 import z from 'zod';
 
 interface VeiculoRequestParams {
   id: string;
-  placa: string
+  placa: string;
 }
+
 class VeiculoController {
     
   static async criarVeiculo(req: FastifyRequest, res: FastifyReply) {

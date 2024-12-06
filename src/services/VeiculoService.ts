@@ -1,6 +1,7 @@
 import prismaClient from '../lib/prisma';
 import { Veiculo } from '../models/veiculo';
 
+
 class VeiculoService {
 
   static async criarVeiculo(dados: { modelo: string; placa: string; tipo: string }): Promise<Veiculo> {

@@ -24,4 +24,13 @@ model Veiculo {
   @@map("veiculos_tb")
 }
 
+model Vaga {
+  id        String    @id @default(uuid())
+  numero    Int       @unique
+  setor     String?
+  status    String    @default("livre") // Pode ser "livre" ou "ocupada"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@map("vagas_tb")
+}
