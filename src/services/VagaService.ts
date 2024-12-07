@@ -27,11 +27,12 @@ class VagaService {
         }
     }
 
-    static async obterVagaPorNumero(numero : number) : Promise<Vaga | null> {
+    static async obterVagaPorNumero(numero: number) : Promise<Vaga | null> {
         try {
-            return await prismaClient.vaga.findUnique({where : { numero }});
+            return await prismaClient.vaga.findUnique({ where: { numero: numero} });
         } catch (error) {
-            throw new Error ('Error ao buscar vagas');
+            console.error("Erro ao buscar vaga por número:", error);  // Imprimir o erro real
+            throw new Error('Error ao buscar vaga');
         }
     }
 

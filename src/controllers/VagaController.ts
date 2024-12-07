@@ -17,10 +17,10 @@ class VagaController {
             return res.code(201).send(vaga);
         } catch (error) {
             if (error instanceof z.ZodError) {
-              return res.status(400).send({ error: 'Dados inválidos', detalhes: error.errors });
+                return res.status(400).send({ error: 'Dados inválidos', detalhes: error.errors });
             }
             return res.status(500).send({ error: 'Erro ao criar Vaga' });
-          }
+        }
     }
 
 
@@ -34,13 +34,13 @@ class VagaController {
     }
 
 
-    static async obterVagaPorId(req: FastifyRequest<{Params: VagaRequestParams}>, res: FastifyReply){
+    static async obterVagaPorId(req: FastifyRequest<{ Params: VagaRequestParams }>, res: FastifyReply) {
         try {
             const { id } = req.params;
             const vaga = await VagaService.obterVagaPorId(id);
             if (!vaga) {
                 return res.status(404).send({ error: 'Vaga não encontrado' });
-              }
+            }
             return res.status(200).send(vaga);
         } catch (error) {
             return res.status(500).send({ error: 'Erro ao buscar Vaga' });
@@ -48,13 +48,13 @@ class VagaController {
     }
 
 
-    static async obterVagaPorNumero(req: FastifyRequest<{Params: VagaRequestParams}>, res: FastifyReply){
+    static async obterVagaPorNumero(req: FastifyRequest<{ Querystring: VagaRequestParams }>, res: FastifyReply) {
         try {
-            const { numero } = req.params;
-            const vaga = await VagaService.obterVagaPorNumero(numero);
+            const { numero } = req.query;
+            const vaga = await VagaService.obterVagaPorNumero(Number(numero));
             if (!vaga) {
                 return res.status(404).send({ error: 'Vaga não encontrado' });
-              }
+            }
             return res.status(200).send(vaga);
         } catch (error) {
             return res.status(500).send({ error: 'Erro ao buscar Vaga' });
@@ -62,39 +62,39 @@ class VagaController {
     }
 
 
-    static async atualizarVaga(req: FastifyRequest<{Params: VagaRequestParams}>, res: FastifyReply) {
+    static async atualizarVaga(req: FastifyRequest<{ Params: VagaRequestParams }>, res: FastifyReply) {
         try {
-            const { id }  = req.params;
+            const { id } = req.params;
             const dados = updateVagaSchema.parse(req.body);
             const vaga = await VagaService.atualizarVaga(id, dados);
-            if(!vaga) {
-                return res.status(404).send({message: " Vaga não encontrada"})
+            if (!vaga) {
+                return res.status(404).send({ message: " Vaga não encontrada" })
             }
             return res.code(201).send(vaga);
         } catch (error) {
             if (error instanceof z.ZodError) {
-              return res.status(400).send({ error: 'Dados inválidos', detalhes: error.errors });
+                return res.status(400).send({ error: 'Dados inválidos', detalhes: error.errors });
             }
             return res.status(500).send({ error: 'Erro ao criar Vaga' });
-          }
-    }
-
-
-    static async deletarVaga(req: FastifyRequest<{Params: VagaRequestParams}>, res: FastifyReply){
-        try {
-            const { id } = req.params;
-            const sucesso = await VagaService.deletarVaga(id);
-            if(!sucesso) {
-                return res.status(404).send({ error: 'Vaga não encontrado' });
-            }
-            return res.status(200).send({ message: "Vaga deletado com sucesso"})
-        } catch (error) {
-            return res.status(500).send({ message: "Erro ao deletado vaga"})
         }
     }
 
 
-    
+    static async deletarVaga(req: FastifyRequest<{ Params: VagaRequestParams }>, res: FastifyReply) {
+        try {
+            const { id } = req.params;
+            const sucesso = await VagaService.deletarVaga(id);
+            if (!sucesso) {
+                return res.status(404).send({ error: 'Vaga não encontrado' });
+            }
+            return res.status(200).send({ message: "Vaga deletado com sucesso" })
+        } catch (error) {
+            return res.status(500).send({ message: "Erro ao deletado vaga" })
+        }
+    }
+
+
+
 }
 
 export default VagaController;

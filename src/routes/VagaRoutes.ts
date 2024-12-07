@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import VagaController from "../controllers/vagaController";
+import VagaController from "../controllers/VagaController";
 
 async function vagaRoutes(app: FastifyInstance) {
     app.get('/vagas', VagaController.listarVagas);
