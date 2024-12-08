@@ -14,23 +14,40 @@ datasource db {
 }
 
 model Veiculo {
-  id      String    @id @default(uuid())
-  modelo  String
-  placa   String @unique
-  tipo    String 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String           @id @default(uuid())
+  modelo          String
+  placa           String           @unique
+  tipo            String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  estacionamentos Estacionamento[]
 
   @@map("veiculos_tb")
 }
 
 model Vaga {
-  id        String    @id @default(uuid())
-  numero    Int       @unique
-  setor     String?
-  status    String    @default("livre") // Pode ser "livre" ou "ocupada"
+  id             String           @id @default(uuid())
+  numero         Int              @unique
+  setor          String?
+  status         String           @default("livre") // Pode ser "livre" ou "ocupada"
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  Estacionamento Estacionamento[]
+
+  @@map("vagas_tb")
+}
+
+model Estacionamento {
+  id        String   @id @default(uuid())
+  entrada   DateTime @default(now())
+  saida     DateTime?
+  valor     Decimal?
+  vagaId    String
+  veiculoId String
+  veiculo   Veiculo  @relation(fields: [veiculoId], references: [id])
+  vaga      Vaga     @relation(fields: [vagaId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("vagas_tb")
+  @@map("estacionamentos_tb")
 }
