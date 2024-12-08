@@ -1,4 +1,4 @@
-export interface Vagas {
+export interface Vaga {
     id: string;
     numero: number;
     setor: string;

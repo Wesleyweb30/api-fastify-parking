@@ -1,5 +1,5 @@
 import prismaClient from '../lib/prisma';
-import { Veiculo } from '../models/veiculo';
+import { Veiculo } from '../models/Veiculo';
 
 
 class VeiculoService {
