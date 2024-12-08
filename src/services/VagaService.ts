@@ -15,7 +15,7 @@ class VagaService {
         try {
             return await prismaClient.vaga.findMany();
         } catch (error) {
-            throw new Error ('Error ao lsitar vagas');
+            throw new Error ('Error ao listar vagas');
         }
     }
 

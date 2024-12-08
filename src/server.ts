@@ -1,10 +1,13 @@
 import fastify from "fastify";
-import veiculoRoutes from "./routes/veiculoRoutes";
-import vagaRoutes from "./routes/vagaRoutes";
+import VeiculoRoutes from "./routes/VeiculoRoutes";
+import VagaRoutes from "./routes/VagaRoutes";
+import EstacionamentoRoutes from "./routes/EstacionamentoRoutes";
+
 const app = fastify();
 
-app.register(veiculoRoutes);
-app.register(vagaRoutes);
+app.register(VeiculoRoutes);
+app.register(VagaRoutes);
+app.register(EstacionamentoRoutes);
 
 const PORT_DEV= Number(process.env.PORT_DEV);
 
